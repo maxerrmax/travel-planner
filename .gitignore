@@ -1,0 +1,36 @@
+# Security - NEVER UPLOAD YOUR API KEYS
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Dependencies
+node_modules/
+jspm_packages/
+package-lock.json
+yarn.lock
+/vendor
+__pycache__/
+*.py[cod]
+*$py.class
+env/
+venv/
+.venv/
+
+# OS Specific Files
+.DS_Store
+Thumbs.db
+
+# IDE/Editor Files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs and temporary files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+logs
+*.log
