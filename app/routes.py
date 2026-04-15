@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, request
+from app.services.ai_service import generate_plan
 
 main = Blueprint("main", __name__)
 
@@ -8,8 +9,17 @@ def home():
 
 @main.route("/plan", methods=["POST"])
 def plan():
-    destination = request.form.get("destination")
     days = request.form.get("days")
+    days = int(days) if days else 0
+    destination = destination.strip()
+    preferences = preferences.strip() if preferences else ""
 
-    return render_template("result.html", destination=destination, days=days)
+    plan = generate_plan(destination, days, preferences)
+
+    return render_template(
+        "result.html",
+        destination=destination,
+        days=days,
+        plan=plan
+    )
 
