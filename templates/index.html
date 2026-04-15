@@ -1,2 +1,27 @@
-<h1>AI Travel Planner</h1>
-<p>Welcome! Your trip starts here ✈️</p>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Travel Planner</title>
+</head>
+<body>
+
+    <h1>Plan your trip ✈️</h1>
+
+    <form method="POST" action="/plan">
+        
+        <label>Destination:</label>
+        <input type="text" name="destination" required>
+        
+        <br><br>
+
+        <label>Days:</label>
+        <input type="number" name="days" required>
+
+        <br><br>
+
+        <button type="submit">Generate plan</button>
+
+    </form>
+
+</body>
+</html>
