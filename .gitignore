@@ -34,3 +34,8 @@ yarn-debug.log*
 yarn-error.log*
 logs
 *.log
+
+# Python virtual environment (IMPORTANT)
+project/
+Lib/
+site-packages/

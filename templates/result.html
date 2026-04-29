@@ -1,5 +1,24 @@
-<h1>Trip to {{ destination }}</h1>
-<p>Days: {{ days }}</p>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Travel Plan</title>
+</head>
+<body>
 
-<h2>Your plan:</h2>
-<p>{{ plan }}</p>
+    <h1>Trip to {{ destination }}</h1>
+    <p><strong>Days:</strong> {{ days }}</p>
+
+    <hr>
+
+    <h2>Travel Plan</h2>
+
+    <div>
+        {{ plan | safe }}
+    </div>
+
+    <br><br>
+
+    <a href="/">← Plan another trip</a>
+
+</body>
+</html>
