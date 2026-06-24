@@ -16,6 +16,15 @@ def generate_plan(destination, days, preferences):
 
     Make it clear, structured, and day by day.
     Make it concise. Maximum 8-10 lines per day.
+    Use Markdown format: 
+
+    Use:
+    # Title
+    ## Day 1
+    ## Day 2
+    ## etc (if needed)
+
+    Use bullet points for activities.
     """
 
     try:

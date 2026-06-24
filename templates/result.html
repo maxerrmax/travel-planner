@@ -1,24 +1,21 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Travel Plan</title>
-</head>
-<body>
+{% extends "base.html" %}
 
-    <h1>Trip to {{ destination }}</h1>
-    <p><strong>Days:</strong> {{ days }}</p>
+{% block content %}
 
-    <hr>
+<div class="container py-5">
 
-    <h2>Travel Plan</h2>
+    <div class="card shadow p-4">
 
-    <div>
+        <h1 class="mb-4">
+            Your trip to {{ destination }}:
+        </h1>
+
+        <hr>
+
         {{ plan | safe }}
+
     </div>
 
-    <br><br>
+</div>
 
-    <a href="/">← Plan another trip</a>
-
-</body>
-</html>
+{% endblock %}

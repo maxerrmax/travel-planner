@@ -8,12 +8,14 @@ main = Blueprint("main", __name__)
 def home():
     return render_template("index.html")
 
+
 @main.route("/plan", methods=["POST"])
 def plan():
-    days = request.form.get("days")
+
+    destination = request.form["destination"]
+    days = request.form["days"]
+    preferences = request.form["Preferences"]
     days = int(days) if days else 0
-    destination = request.form.get("destination")
-    preferences = request.form.get("preferences")
     destination = destination.strip()
     preferences = preferences.strip() if preferences else ""
 
@@ -26,4 +28,3 @@ def plan():
         days=days,
         plan=plan
     )
-

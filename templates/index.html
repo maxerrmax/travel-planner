@@ -1,33 +1,67 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Travel Planner</title>
-</head>
-<body>
+{% extends "base.html" %}
 
-    <h1>Plan your trip ✈️</h1>
-    <p>Enter your destination and preferences to generate a personalized itinerary.</p>
+{% block content %}
 
-    <form method="POST" action="/plan">
-        
-        <label>Destination:</label>
-        <input type="text" name="destination" required>
-        
-        <br><br>
+<div class="container vh-100 d-flex justify-content-center align-items-center">
 
-        <label>Days:</label>
-        <input type="number" name="days" required>
+    <div class="card shadow p-4" style="width: 500px;">
 
-        <br><br>
+        <h1 class="text-center mb-4">
+            ✈️ AI Travel Planner
+        </h1>
 
-        <label>Preferences:</label>
-        <input type="text" name="preferences">
+        <form method="POST" action="/plan">
 
-        <br><br>
+            <div class="mb-3">
+                <label class="form-label">
+                    Destination
+                </label>
 
-        <button type="submit">Generate plan</button>
+                <input
+                    type="text"
+                    name="destination"
+                    class="form-control"
+                    placeholder="Ex: Tokyo"
+                    required>
+            </div>
 
-    </form>
+            <div class="mb-3">
+                <label class="form-label">
+                    Days
+                </label>
 
-</body>
-</html>
+                <input
+                    type="number"
+                    name="days"
+                    class="form-control"
+                    min="1"
+                    required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">
+                    Preferences
+                </label>
+
+                <input
+                    type="text"
+                    name="Preferences"
+                    class="form-control"
+                    placeholder="Ex: Culture"
+                    required>
+            </div>
+
+            <button
+                type="submit"
+                class="btn btn-primary w-100">
+
+                Generar pla
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}
