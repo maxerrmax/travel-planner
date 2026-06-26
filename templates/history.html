@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <h1 class="mb-4">Travel History</h1>
+
+    <table class="table table-striped">
+
+        <thead>
+            <tr>
+                <th>Destination</th>
+                <th>Days</th>
+                <th>Preferences</th>
+                <th>Date</th>
+                <th>View</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            {% for trip in itineraries %}
+
+            <tr>
+                <td>{{ trip[1] }}</td>
+                <td>{{ trip[2] }}</td>
+                <td>{{ trip[3] }}</td>
+                <td>{{ trip[4] }}</td>
+                <td>
+                    <a href="/trip/{{ trip[0] }}" class="btn btn-sm btn-primary">
+                        Open
+                    </a>
+                </td>
+            </tr>
+
+            {% endfor %}
+
+        </tbody>
+
+    </table>
+
+</div>
+
+{% endblock %}
