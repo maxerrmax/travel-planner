@@ -4,16 +4,79 @@
 
 <div class="container py-5">
 
-    <div class="card shadow p-4">
+    <div class="row">
 
-        <h1 class="mb-4">
-            Your trip to {{ destination }}:
-        </h1>
+        <div class="col-md-6 mb-3">
+            <div class="card shadow p-4 mb-4">
+                <h1>{{ trip.title }}</h1>
+                <p class="lead">
+                    {{ trip.overview }}
+                </p>
+            </div>
+        </div>
 
-        <hr>
+        {% for day in trip.days %}
 
-        {{ plan | safe }}
+        <div class="col-md-6 mb-3">
+            <div class="card shadow-sm mb-4">
+                <div class="card-body">
 
+                    <h2>📅 Day {{ day.day }}</h2>
+                    <p class="text-muted">{{ day.summary }}</p>
+                    <hr>
+
+                    <h5>🌅 Morning</h5>
+                    <ul>
+                        {% for activity in day.morning %}
+                            <li>{{ activity }}</li>
+                        {% endfor %}
+                    </ul>
+
+                    <h5>🍝 Lunch</h5>
+                    <ul>
+                        {% for activity in day.lunch %}
+                            <li>{{ activity }}</li>
+                        {% endfor %}
+                    </ul>
+
+                    <h5>🏛 Afternoon</h5>
+                    <ul>
+                        {% for activity in day.afternoon %}
+                            <li>{{ activity }}</li>
+                        {% endfor %}
+                    </ul>
+
+                    <h5>🍷 Dinner</h5>
+                    <ul>
+                        {% for activity in day.dinner %}
+                            <li>{{ activity }}</li>
+                        {% endfor %}
+                    </ul>
+
+                    <h5>🌙 Evening</h5>
+                    <ul>
+                        {% for activity in day.evening %}
+                            <li>{{ activity }}</li>
+                        {% endfor %}
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+
+        {% endfor %}
+
+    </div>  {# ← tancament correcte del row, després del endfor #}
+
+    <div class="card border-success">
+        <div class="card-body">
+            <h3>💡 Practical Tips</h3>
+            <ul>
+                {% for tip in trip.tips %}
+                    <li>{{ tip }}</li>
+                {% endfor %}
+            </ul>
+        </div>
     </div>
 
 </div>

@@ -5,7 +5,7 @@ from app.database import (
     get_all_itineraries,
     get_itinerary_by_id
 )
-import markdown
+import json
 
 main = Blueprint("main", __name__)
 
@@ -20,20 +20,29 @@ def plan():
     destination = request.form["destination"]
     days = request.form["days"]
     preferences = request.form["Preferences"]
+    budget = request.form["budget"]
 
     days = int(days) if days else 0
     destination = destination.strip()
+    budget = budget.strip() if budget else ""
     preferences = preferences.strip() if preferences else ""
 
-    plan_raw = generate_plan(destination, days, preferences)
-    plan = markdown.markdown(plan_raw)
-    save_itinerary(destination, days, preferences, plan)
+    trip = generate_plan(destination, days, preferences, budget)
+
+
+    save_itinerary(
+        destination,
+        days,
+        preferences,
+        budget,
+        json.dumps(trip)
+    )
 
     return render_template(
         "result.html",
         destination=destination,
         days=days,
-        plan=plan
+        trip=trip
     )
 
 @main.route("/history")
@@ -58,6 +67,7 @@ def trip(id):
         "result.html",
         destination=itinerary[0],
         days=itinerary[1],
-        preferences= itinerary[2],
-        plan=itinerary[3]
+        preferences=itinerary[2],
+        budget=itinerary[3],
+        trip=json.loads(itinerary[4])  # ← era "plan=itinerary[4]", sense json.loads
     )
