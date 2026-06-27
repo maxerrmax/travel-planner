@@ -15,7 +15,7 @@ def init_db():
             budget TEXT NOT NULL,       
             plan TEXT NOT NULL,
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-            image_url TEXT NOT NULL
+            image_url TEXT
         )
     """)
 

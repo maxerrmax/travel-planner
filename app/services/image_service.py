@@ -15,7 +15,7 @@ def get_destination_image(destination):
     }
 
     params = {
-        "query": f"{destination} landmarks",
+        "query": f"{destination} scenery",
         "per_page": 1,
         "orientation": "landscape"
     }
