@@ -2,3 +2,5 @@ flask
 openai
 markdown
 pytest
+requests
+json

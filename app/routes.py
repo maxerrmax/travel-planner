@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, request
 from app.services.ai_service import generate_plan
+from app.services.image_service import get_destination_image
 from app.database import (
     save_itinerary,
     get_all_itineraries,
@@ -28,13 +29,14 @@ def plan():
     preferences = preferences.strip() if preferences else ""
 
     trip = generate_plan(destination, days, preferences, budget)
-
+    image_url = get_destination_image(destination)
 
     save_itinerary(
         destination,
         days,
         preferences,
         budget,
+        image_url,
         json.dumps(trip)
     )
 
@@ -42,7 +44,8 @@ def plan():
         "result.html",
         destination=destination,
         days=days,
-        trip=trip
+        trip=trip,
+        image_url=image_url
     )
 
 @main.route("/history")
@@ -69,5 +72,6 @@ def trip(id):
         days=itinerary[1],
         preferences=itinerary[2],
         budget=itinerary[3],
-        trip=json.loads(itinerary[4])  # ← era "plan=itinerary[4]", sense json.loads
+        image_url=itinerary[4],
+        trip=json.loads(itinerary[5])  # ← era "plan=itinerary[4]", sense json.loads
     )

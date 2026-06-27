@@ -12,6 +12,7 @@ def generate_plan(destination, days, preferences, budget):
         days = int(days)
     except:
         return "Error: days must be a number"
+         
     prompt = f"""
         You are an expert travel planner.
 
@@ -22,14 +23,14 @@ def generate_plan(destination, days, preferences, budget):
         - Budget: {budget}
 
         Return ONLY valid JSON.
-
         Do not include Markdown.
         Do not include explanations.
-        Do not wrap the JSON inside ```.
+        Do not wrap the JSON inside ```
         For each day, include a "summary" field with 2–3 sentences describing the goal and atmosphere of that day before listing the activities.
         For each activity include a short summary of it (what there is to see, how to get there, information about it, etc.)
         For each meal include information about the restaurant (where it is located, how close it is to the activity, type of restaurant, etc.)
-        Bear in mind the price and preferences restrictions.
+        Bear in mind the price and preferences restrictions..
+        If you feel like there is enough time you may add more than one activity (morning, afternoon or evening).
 
         Use exactly this schema:
 
@@ -39,12 +40,22 @@ def generate_plan(destination, days, preferences, budget):
             "days": [
                 {{
                     "day": 1,
-                    "summary": ["summary of the day"]
-                    "morning": ["activity", "..."],
-                    "lunch": ["restaurant"],
-                    "afternoon": ["activity"],
-                    "dinner": ["restaurant"],
-                    "evening": ["activity"]
+                    "summary": "2-3 sentences describing the goal and atmosphere of the day",
+                    "morning": [
+                        {{"activity": "name of the activity", "summary": "what there is to see, how to get there, useful info"}}
+                    ],
+                    "lunch": [
+                        {{"activity": "name of the restaurant", "summary": "location, type of food, price range, proximity to morning activity"}}
+                    ],
+                    "afternoon": [
+                        {{"activity": "name of the activity", "summary": "what there is to see, how to get there, useful info"}}
+                    ],
+                    "dinner": [
+                        {{"activity": "name of the restaurant", "summary": "location, type of food, price range, proximity to afternoon activity"}}
+                    ],
+                    "evening": [
+                        {{"activity": "name of the activity", "summary": "what there is to see, how to get there, useful info"}}
+                    ]
                 }}
             ],
             "tips": [
@@ -53,7 +64,6 @@ def generate_plan(destination, days, preferences, budget):
             ]
         }}
         """
-
     try:
         response = client.chat.completions.create(
             model="gpt-4o-mini",

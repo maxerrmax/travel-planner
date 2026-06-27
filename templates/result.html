@@ -4,17 +4,28 @@
 
 <div class="container py-5">
 
-    <div class="row">
+    {% if image_url %}
+    <div class="row justify-content-center mb-4">
+        <div class="col-lg-12">
+            <img
+                src="{{ image_url }}"
+                class="img-fluid rounded shadow"
+                alt="{{ destination }}"
+                style="width:100%; height:300px; object-fit:cover;">
+        </div>
+    </div>
+    {% endif %}
 
-        <div class="col-md-6 mb-3">
+    <div class="row justify-content-center">
+        <div class="col-md-12 mb-3">
             <div class="card shadow p-4 mb-4">
                 <h1>{{ trip.title }}</h1>
-                <p class="lead">
-                    {{ trip.overview }}
-                </p>
+                <p class="lead">{{ trip.overview }}</p>
             </div>
         </div>
+    </div>
 
+    <div class="row">
         {% for day in trip.days %}
 
         <div class="col-md-6 mb-3">
@@ -28,35 +39,50 @@
                     <h5>🌅 Morning</h5>
                     <ul>
                         {% for activity in day.morning %}
-                            <li>{{ activity }}</li>
+                            <li>
+                                <strong>{{ activity.activity }}</strong><br>
+                                <small class="text-muted">{{ activity.summary }}</small>
+                            </li>
                         {% endfor %}
                     </ul>
 
                     <h5>🍝 Lunch</h5>
                     <ul>
                         {% for activity in day.lunch %}
-                            <li>{{ activity }}</li>
+                            <li>
+                                <strong>{{ activity.activity }}</strong><br>
+                                <small class="text-muted">{{ activity.summary }}</small>
+                            </li>
                         {% endfor %}
                     </ul>
 
                     <h5>🏛 Afternoon</h5>
                     <ul>
                         {% for activity in day.afternoon %}
-                            <li>{{ activity }}</li>
+                            <li>
+                                <strong>{{ activity.activity }}</strong><br>
+                                <small class="text-muted">{{ activity.summary }}</small>
+                            </li>
                         {% endfor %}
                     </ul>
 
                     <h5>🍷 Dinner</h5>
                     <ul>
                         {% for activity in day.dinner %}
-                            <li>{{ activity }}</li>
+                            <li>
+                                <strong>{{ activity.activity }}</strong><br>
+                                <small class="text-muted">{{ activity.summary }}</small>
+                            </li>
                         {% endfor %}
                     </ul>
 
                     <h5>🌙 Evening</h5>
                     <ul>
                         {% for activity in day.evening %}
-                            <li>{{ activity }}</li>
+                            <li>
+                                <strong>{{ activity.activity }}</strong><br>
+                                <small class="text-muted">{{ activity.summary }}</small>
+                            </li>
                         {% endfor %}
                     </ul>
 

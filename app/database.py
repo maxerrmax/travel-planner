@@ -14,21 +14,22 @@ def init_db():
             preferences TEXT NOT NULL,
             budget TEXT NOT NULL,       
             plan TEXT NOT NULL,
-            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            image_url TEXT NOT NULL
         )
     """)
 
     conn.commit()
     conn.close()
 
-def save_itinerary(destination, days, preferences, budget, plan):
+def save_itinerary(destination, days, preferences, budget, image_url, plan):
     conn = sqlite3.connect(DB_NAME)
     cursor = conn.cursor()
 
     cursor.execute("""
-        INSERT INTO itineraries (destination, days, preferences, budget, plan)
-        VALUES (?, ?, ?, ?, ?)
-    """, (destination, days, preferences, budget, plan))
+        INSERT INTO itineraries (destination, days, preferences, budget, image_url, plan)
+        VALUES (?, ?, ?, ?, ?,?)
+    """, (destination, days, preferences, budget, image_url, plan))
 
     conn.commit()
     conn.close()
@@ -54,7 +55,7 @@ def get_itinerary_by_id(id):
     cursor = conn.cursor()
 
     cursor.execute("""
-        SELECT destination, days, preferences, budget, plan
+        SELECT destination, days, preferences, budget, image_url, plan
         FROM itineraries
         WHERE id = ?
     """, (id,))
