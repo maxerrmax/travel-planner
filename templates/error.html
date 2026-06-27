@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container py-5 text-center">
+
+    <h1 class="display-5 mb-3">
+        ⚠️ We couldn't generate your itinerary
+    </h1>
+
+    <p class="lead text-muted">
+        The AI service is temporarily unavailable or returned an unexpected response.
+        Please try again in a few moments.
+    </p>
+
+    <div class="mt-4">
+
+        <a href="/" class="btn btn-primary me-2">
+            🏠 Back Home
+        </a>
+
+        <button onclick="history.back()" class="btn btn-outline-secondary">
+            🔄 Try Again
+        </button>
+
+    </div>
+
+</div>
+
+{% endblock %}

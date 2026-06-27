@@ -72,4 +72,4 @@ def generate_plan(destination, days, preferences, budget):
         return json.loads(response.choices[0].message.content)
 
     except Exception as e:
-        return f"AI error: {str(e)}"
+        raise Exception(f"AI error: {e}")

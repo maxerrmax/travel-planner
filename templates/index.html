@@ -117,4 +117,10 @@ document.getElementById("tripForm").addEventListener("submit", function() {
 
 </script>
 
+{% if error %}
+    <div class="alert alert-danger">
+        {{ error }}
+    </div>
+{% endif %}
+
 {% endblock %}

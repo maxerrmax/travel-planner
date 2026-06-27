@@ -1,12 +1,16 @@
 from flask import Blueprint, render_template, request
 from app.services.ai_service import generate_plan
 from app.services.image_service import get_destination_image
+from app.utils.validator import validate_trip
 from app.database import (
     save_itinerary,
     get_all_itineraries,
     get_itinerary_by_id
 )
 import json
+import logging
+
+logger = logging.getLogger(__name__)
 
 main = Blueprint("main", __name__)
 
@@ -28,17 +32,27 @@ def plan():
     budget = budget.strip() if budget else ""
     preferences = preferences.strip() if preferences else ""
 
-    trip = generate_plan(destination, days, preferences, budget)
-    image_url = get_destination_image(destination)
+    try:
+        trip = generate_plan(destination, days, preferences, budget)
 
-    save_itinerary(
-        destination,
-        days,
-        preferences,
-        budget,
-        image_url,
-        json.dumps(trip)
-    )
+        image_url = get_destination_image(destination)
+
+        save_itinerary(
+            destination,
+            days,
+            preferences,
+            budget,
+            image_url,
+            json.dumps(trip)
+        )
+
+    except Exception:
+        return render_template(
+            "error.html",
+            message="We couldn't generate your itinerary right now. Please try again in a few moments."
+        )
+
+    logger.info("Trip generated successfully.")
 
     return render_template(
         "result.html",
@@ -47,6 +61,8 @@ def plan():
         trip=trip,
         image_url=image_url
     )
+
+    
 
 @main.route("/history")
 def history():
@@ -73,5 +89,5 @@ def trip(id):
         preferences=itinerary[2],
         budget=itinerary[3],
         image_url=itinerary[4],
-        trip=json.loads(itinerary[5])  # ← era "plan=itinerary[4]", sense json.loads
+        trip=json.loads(itinerary[5]) 
     )

@@ -34,7 +34,7 @@ yarn-debug.log*
 yarn-error.log*
 logs
 *.log
-*.db
+travel_plans.db
 
 # Python virtual environment (IMPORTANT)
 project/
