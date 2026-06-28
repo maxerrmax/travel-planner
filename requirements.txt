@@ -1,6 +1,7 @@
-flask
+Flask
 openai
-markdown
-pytest
+python-dotenv
+Markdown
 requests
-json
+pytest
+gunicorn
